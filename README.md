@@ -1,45 +1,29 @@
-# Open-Elevation - Remake
-### ↓ Read install instructions below ↓
-
+# Open-Elevation 
 A free and open-source elevation API by Jorl17. The original is available at: [https://github.com/Jorl17/open-elevation](https://github.com/Jorl17/open-elevation). Thanks for your work.
-
 
 **Open-Elevation** is a free and open-source alternative to the [Google Elevation API](https://developers.google.com/maps/documentation/elevation/start) and similar offerings.
 
 This service came out of the need to have a hosted, easy to use and easy to setup elevation API. While there are some alternatives out there, none of them work out of the box, and seem to point to dead datasets. <b>Open-Elevation</b> is easy to setup, has its own docker image and provides scripts for you to easily acquire whatever datasets you want.
 
 Open-Elevation API Doc for details and ustage
-#####     [doc/api.md](https://github.com/Developer66/open-elevation/blob/master/docs/api.md)
+##### [doc/api.md](https://github.com/Developer66/open-elevation/blob/master/docs/api.md)
 
 
 -----
 # Changes to the original version:
-* changing TIFF file locations - to working one - for SRTM 250m data in download script
+* changing TIFF file locations - to an aws s3 bucket for use inside the docker image
 * changing create-dataset.sh to work again
 * fixing download scripts
 
 ### News:
 * added a preinstall documentation for dependencies
 * adding service file for linux (e.g. autostart)
-
-    ### SRTM 90M from https://geoservice.dlr.de/
-    * adding Doc for using SRTM 90m data from https://geoservice.dlr.de/web/dataguide/tdm90/
-    * adding java downloader for data from https://geoservice.dlr.de/
-    * adding JavaProject to download and xxtract all files and put it to the right place
  
-### Bugs:
- * SRTM 90M TanDEM data are 40 to high. Issue: [here](https://github.com/Developer66/open-elevation/issues/1)
------
-
-# How to install:
-*I tested the install procedure on a fresh Ubuntu 18.10.*
-
-
+# How to run locally:
 Fist of all clone this repository to your favourite location. (Use a permanent place for it where it won't be deleted)
 
 ### Default 250m files (after procedure ca. 20GB)
 1. Make sure your system is up-to-date
-
     ```
     sudo apt-get update
     sudo apt-get upgrade -y
@@ -74,12 +58,11 @@ Fist of all clone this repository to your favourite location. (Use a permanent p
     ```
     ##  open terminal and cd to your open-elevation dir ##
     // Mark scripts as executable
-    sudo chmod +x download-srtm-data.sh create-tiles.sh create-dataset.sh
+    sudo chmod +x create-tiles.sh create-dataset.sh
     
     // Execute
     ./create-dataset.sh
-    ```
-    
+    ```    
     The script should be downloading at this point and * this can take some time - up to 2 hours *.
 
 5. **Optional** Adding Service to your computer (e.g. autostart)

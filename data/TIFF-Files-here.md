@@ -1,1 +1,0 @@
-Your geoTiff's have to be in this folder.

@@ -1,8 +1,5 @@
-##
+## created using multiple resources. thanks and credits to following: 
 # geographica/gdal2
-#
-# This creates an Ubuntu derived base image that installs GDAL 2.
-#
 # Ubuntu 16.04 Xenial Xerus
 FROM ubuntu:xenial
 
@@ -13,7 +10,7 @@ ENV GDAL_VERSION 2.1.3
 WORKDIR $ROOTDIR/
 ADD http://download.osgeo.org/gdal/${GDAL_VERSION}/gdal-${GDAL_VERSION}.tar.gz $ROOTDIR/src/
 
-# Install basic dependencies
+# Install basic dependencies. For info on why, refer to geographica/gdal on github
 RUN apt-get update -y && apt-get install -y \
     software-properties-common \
     python-software-properties \
@@ -49,7 +46,9 @@ RUN pip install -r requirements.txt
 RUN mkdir /code
 ADD . /code/
 WORKDIR /code
+RUN apt-get install -y libspatialindex-dev unar bc
 
 # Output version of gdal and its capabilities and start our elevation server
-CMD bash create-dataset.sh && gdalinfo --version && gdalinfo --formats && ogrinfo --formats && python server.py
+CMD gdalinfo --version && gdalinfo --formats && ogrinfo --formats && python server.py
+
 EXPOSE 8080
